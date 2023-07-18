@@ -41,7 +41,6 @@ public class PhotoController{
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return photo;
     }
-
     @PutMapping("/photos/add")
     public Photo create(Photo photo){
         photo.setId(UUID.randomUUID().toString());
