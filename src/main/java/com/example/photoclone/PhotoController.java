@@ -1,5 +1,7 @@
 package com.example.photoclone;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -41,10 +43,11 @@ public class PhotoController{
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return photo;
     }
-    @PutMapping("/photos/add")
-    public Photo create(Photo photo){
+    @PostMapping("/photos/add")
+    public Photo create(@RequestBody @Valid Photo photo){
         photo.setId(UUID.randomUUID().toString());
         db.put(photo.getId(), photo);
+//        System.out.println(UUID.randomUUID().toString());
         return  photo;
     }
 }
