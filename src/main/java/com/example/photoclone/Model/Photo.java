@@ -1,5 +1,6 @@
-package com.example.photoclone;
+package com.example.photoclone.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 
 public class Photo {
@@ -7,6 +8,11 @@ public class Photo {
     private String id;
     @NotEmpty
     private String FileName;
+
+    @JsonIgnore
+    private byte[] data; // contains photo data
+
+    private String ContentType;
 
     public Photo(){ }
 
@@ -33,6 +39,21 @@ public class Photo {
         System.out.println(id);
     }
 
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
+    }
+
+    public String getContentType() {
+        return ContentType;
+    }
+
+    public void setContentType(String contentType) {
+        ContentType = contentType;
+    }
 }
 
 
