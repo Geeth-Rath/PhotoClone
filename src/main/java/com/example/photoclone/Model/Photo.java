@@ -2,10 +2,13 @@ package com.example.photoclone.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
+@Table("Photos")
 public class Photo {
-
-    private String id;
+    @Id
+    private Integer id;
     @NotEmpty
     private String FileName;
 
@@ -14,12 +17,17 @@ public class Photo {
 
     private String ContentType;
 
+
+
     public Photo(){ }
 
-    public  Photo(String id, String FileName){
+    public  Photo(Integer id, String FileName){
         this.id = id;
         this.FileName = FileName;
     }
+
+
+
 
     public String getFileName() {
         return FileName;
@@ -29,11 +37,11 @@ public class Photo {
         FileName = fileName;
     }
 
-    public String getId(){
+    public Integer getId(){
         return id;
     }
 
-    public void setId(String Id){
+    public void setId(Integer Id){
 
         id = Id;
         System.out.println(id);
@@ -55,23 +63,3 @@ public class Photo {
         ContentType = contentType;
     }
 }
-
-
-//(async function AddPhoto(){
-//
-//        let Photo = {"fileName": "geethma.jpg"};
-//
-//
-//        await fetch ('http://localhost:8080/photos/add', {
-//
-//        method:'POST',
-//
-//        headers:{
-//        Accept:'application/json',
-//        'Content-Type' : 'application/json',
-//        },
-//
-//        body: JSON.stringify(Photo)})
-//        .then( result => result.text ())
-//        .then ( text => alert (text));
-//        })();

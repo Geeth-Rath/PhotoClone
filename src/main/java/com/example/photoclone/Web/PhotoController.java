@@ -13,40 +13,40 @@ import java.util.*;
 @RestController
 public class PhotoController{
 
-    //    private List<Photo> db = List.of(new Photo("1", "hello.jpg"));
-    private final Photoservice photoservice;
+    private final Photoservice photozService;
 
-    public PhotoController(Photoservice photoservice) {
-        this.photoservice = photoservice;
+    public PhotoController(Photoservice photozService) {
+        this.photozService = photozService;
     }
 
-
     @GetMapping("/")
-    public String Hello(){
+    public String hello() {
+        System.out.println("**********************");
         return "Hello World";
     }
 
-    @GetMapping("/photos")
-    public Collection<Photo> get(){
-        return photoservice.get();
+    @GetMapping("/photoz")
+    public Iterable<Photo> get() {
+        System.out.println("######################");
+        System.out.println(photozService.get());
+        return photozService.get();
     }
 
-    @GetMapping("/photos/{id}")
-    public Photo get(@PathVariable String id){
-        Photo photo = photoservice.get(id);
+    @GetMapping("/photoz/{id}")
+    public Photo get(@PathVariable Integer id) {
+        Photo photo = photozService.get(id);
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return photo;
     }
 
-    @DeleteMapping("/photo/{id}")
-    public Photo delete(@PathVariable String id){
-        Photo photo = photoservice.remove(id);
-        if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return photo;
+    @DeleteMapping("/photoz/{id}")
+    public void delete(@PathVariable Integer id) {
+        photozService.remove(id);
     }
-    @PostMapping("/photos/add")
+
+    @PostMapping("/photoz")
     public Photo create(@RequestPart("data") MultipartFile file) throws IOException {
-        return photoservice.save(file.getOriginalFilename(),file.getContentType(), file.getBytes());
-
+        System.out.println("sssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavvvvvvveeeeeeee");
+        return photozService.save(file.getOriginalFilename(), file.getContentType(), file.getBytes());
     }
 }
